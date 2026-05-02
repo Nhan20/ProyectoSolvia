@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.solvia.model.entity;
+package com.solvia.model;
 import jakarta.persistence.*;
 
 @Entity
@@ -38,6 +38,20 @@ public class LogMovimiento {
 		this.accion = accion;
 		this.descripcion = descripcion;
 		this.usuario = usuario;
+	}
+	
+	
+
+	/**
+	 * @param id
+	 * @param accion
+	 * @param descripcion
+	 */
+	public LogMovimiento(Long id, String accion, String descripcion) {
+		super();
+		this.id = id;
+		this.accion = accion;
+		this.descripcion = descripcion;
 	}
 
 	/**

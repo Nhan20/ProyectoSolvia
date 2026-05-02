@@ -1,7 +1,8 @@
 /**
  * 
  */
-package com.solvia.model.entity;
+package com.solvia.model;
+
 /**
  * 
  */
@@ -11,58 +12,53 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "acudientes")
-
+@Table(name = "colegios")
 /**
  * 
  */
-public class Acudiente extends BaseEntity {
+public class Colegio extends BaseEntity{
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable = false)
-    private String nombre;
+	@Column(nullable = false)
+	private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private String identificacion;
+	@Column(nullable = false, unique = true)
+	private String nit;
 
-    private String correo;
-
-    private String telefono;
-
-    @OneToMany(mappedBy = "acudiente")
-    private List<Estudiante> estudiantes;
+	private String direccion;
     
-    /**
-     * 
-     */
-    public Acudiente() {
+	private String telefono;
+
+	@OneToMany(mappedBy = "colegio")
+	private List<Estudiante> estudiantes;
+	
+	@OneToMany(mappedBy = "colegio")
+	private List<LogCargaArchivo> logs;
+
+	public Colegio() {
 		// TODO Auto-generated constructor stub
 	}
-
-    
 
 	/**
 	 * @param id
 	 * @param nombre
-	 * @param identificacion
-	 * @param correo
+	 * @param nit
+	 * @param direccion
 	 * @param telefono
 	 * @param estudiantes
 	 */
-	public Acudiente(Long id, String nombre, String identificacion, String correo, String telefono,
+	public Colegio(Long id, String nombre, String nit, String direccion, String telefono,
 			List<Estudiante> estudiantes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.identificacion = identificacion;
-		this.correo = correo;
+		this.nit = nit;
+		this.direccion = direccion;
 		this.telefono = telefono;
 		this.estudiantes = estudiantes;
 	}
-
-
 
 	/**
 	 * @return the id
@@ -71,14 +67,12 @@ public class Acudiente extends BaseEntity {
 		return id;
 	}
 
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	/**
 	 * @return the nombre
@@ -87,7 +81,6 @@ public class Acudiente extends BaseEntity {
 		return nombre;
 	}
 
-
 	/**
 	 * @param nombre the nombre to set
 	 */
@@ -95,38 +88,33 @@ public class Acudiente extends BaseEntity {
 		this.nombre = nombre;
 	}
 
-
 	/**
-	 * @return the identificacion
+	 * @return the nit
 	 */
-	public String getIdentificacion() {
-		return identificacion;
+	public String getNit() {
+		return nit;
 	}
 
-
 	/**
-	 * @param identificacion the identificacion to set
+	 * @param nit the nit to set
 	 */
-	public void setIdentificacion(String identificacion) {
-		this.identificacion = identificacion;
+	public void setNit(String nit) {
+		this.nit = nit;
 	}
 
-
 	/**
-	 * @return the correo
+	 * @return the direccion
 	 */
-	public String getCorreo() {
-		return correo;
+	public String getDireccion() {
+		return direccion;
 	}
 
-
 	/**
-	 * @param correo the correo to set
+	 * @param direccion the direccion to set
 	 */
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
-
 
 	/**
 	 * @return the telefono
@@ -135,14 +123,12 @@ public class Acudiente extends BaseEntity {
 		return telefono;
 	}
 
-
 	/**
 	 * @param telefono the telefono to set
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
 
 	/**
 	 * @return the estudiantes
@@ -151,14 +137,14 @@ public class Acudiente extends BaseEntity {
 		return estudiantes;
 	}
 
-
 	/**
 	 * @param estudiantes the estudiantes to set
 	 */
 	public void setEstudiantes(List<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
 	}
-    
-    
-    
+	
+	
+	
 }
+	

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.solvia.model.entity;
+package com.solvia.model;
 
 /**
  * 

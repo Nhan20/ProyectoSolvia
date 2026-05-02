@@ -1,20 +1,22 @@
 /**
  * 
  */
-package com.solvia.model.entity;
+package com.solvia.model;
 /**
  * 
  */
 import jakarta.persistence.*;
+import java.util.List;
 /**
  * 
  */
 @Entity
-@Table(name = "estudiantes")
+@Table(name = "acudientes")
+
 /**
  * 
  */
-public class Estudiante extends BaseEntity {
+public class Acudiente extends BaseEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,38 +27,42 @@ public class Estudiante extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String identificacion;
 
-    private String curso;
+    private String correo;
 
-    @ManyToOne
-    @JoinColumn(name = "colegio_id", nullable = false)
-    private Colegio colegio;
+    private String telefono;
 
-    @ManyToOne
-    @JoinColumn(name = "acudiente_id", nullable = false)
-    private Acudiente acudiente;
+    @OneToMany(mappedBy = "acudiente")
+    private List<Estudiante> estudiantes;
     
-    public Estudiante() {
+    /**
+     * 
+     */
+    public Acudiente() {
 		// TODO Auto-generated constructor stub
 	}
+
+    
 
 	/**
 	 * @param id
 	 * @param nombre
 	 * @param identificacion
-	 * @param curso
-	 * @param colegio
-	 * @param acudiente
+	 * @param correo
+	 * @param telefono
+	 * @param estudiantes
 	 */
-	public Estudiante(Long id, String nombre, String identificacion, String curso, Colegio colegio,
-			Acudiente acudiente) {
+	public Acudiente(Long id, String nombre, String identificacion, String correo, String telefono,
+			List<Estudiante> estudiantes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.identificacion = identificacion;
-		this.curso = curso;
-		this.colegio = colegio;
-		this.acudiente = acudiente;
+		this.correo = correo;
+		this.telefono = telefono;
+		this.estudiantes = estudiantes;
 	}
+
+
 
 	/**
 	 * @return the id
@@ -65,12 +71,14 @@ public class Estudiante extends BaseEntity {
 		return id;
 	}
 
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	/**
 	 * @return the nombre
@@ -79,12 +87,14 @@ public class Estudiante extends BaseEntity {
 		return nombre;
 	}
 
+
 	/**
 	 * @param nombre the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 
 	/**
 	 * @return the identificacion
@@ -93,6 +103,7 @@ public class Estudiante extends BaseEntity {
 		return identificacion;
 	}
 
+
 	/**
 	 * @param identificacion the identificacion to set
 	 */
@@ -100,46 +111,54 @@ public class Estudiante extends BaseEntity {
 		this.identificacion = identificacion;
 	}
 
-	/**
-	 * @return the curso
-	 */
-	public String getCurso() {
-		return curso;
-	}
 
 	/**
-	 * @param curso the curso to set
+	 * @return the correo
 	 */
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public String getCorreo() {
+		return correo;
 	}
 
-	/**
-	 * @return the colegio
-	 */
-	public Colegio getColegio() {
-		return colegio;
-	}
 
 	/**
-	 * @param colegio the colegio to set
+	 * @param correo the correo to set
 	 */
-	public void setColegio(Colegio colegio) {
-		this.colegio = colegio;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
-	/**
-	 * @return the acudiente
-	 */
-	public Acudiente getAcudiente() {
-		return acudiente;
-	}
 
 	/**
-	 * @param acudiente the acudiente to set
+	 * @return the telefono
 	 */
-	public void setAcudiente(Acudiente acudiente) {
-		this.acudiente = acudiente;
+	public String getTelefono() {
+		return telefono;
 	}
+
+
+	/**
+	 * @param telefono the telefono to set
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+	/**
+	 * @return the estudiantes
+	 */
+	public List<Estudiante> getEstudiantes() {
+		return estudiantes;
+	}
+
+
+	/**
+	 * @param estudiantes the estudiantes to set
+	 */
+	public void setEstudiantes(List<Estudiante> estudiantes) {
+		this.estudiantes = estudiantes;
+	}
+    
+    
     
 }
