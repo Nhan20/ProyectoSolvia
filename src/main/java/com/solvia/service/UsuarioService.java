@@ -55,7 +55,7 @@ public class UsuarioService {
 
 	public String generarToken(Usuario user) {
 
-		String SECRET_KEY = "mi_clave_secreta_muy_larga_123456";
+		String SECRET_KEY = "solvia_jwt_secret_key_2026_super_segura_con_muchos_caracteres_123456789";
 
 		Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 

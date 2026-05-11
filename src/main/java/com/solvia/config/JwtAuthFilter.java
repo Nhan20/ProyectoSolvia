@@ -5,6 +5,7 @@ package com.solvia.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,12 +17,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
+import javax.crypto.SecretKey;
+
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-	private final String SECRET_KEY = "mi_clave_secreta_muy_larga_123456";
+	private final String SECRET_KEY = "solvia_jwt_secret_key_2026_super_segura_con_muchos_caracteres_123456789";
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -37,7 +41,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		String token = authHeader.substring(7);
 
 		try {
-			Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+
+			SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+
+			Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
 
 			String email = claims.getSubject();
 			String role = claims.get("role", String.class);
@@ -48,7 +55,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 			SecurityContextHolder.getContext().setAuthentication(auth);
 
 		} catch (Exception e) {
-			System.out.println("Token inválido");
+			e.printStackTrace();
 		}
 
 		filterChain.doFilter(request, response);
