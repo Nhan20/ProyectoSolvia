@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
 
+
 	@Autowired
     private UsuarioService userServ;
     
     
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-
 		return ResponseEntity.ok(userServ.login(request));
 	}
     

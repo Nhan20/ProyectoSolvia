@@ -8,6 +8,8 @@ package com.solvia.model;
  */
 import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * 
  */
@@ -31,11 +33,9 @@ public class Colegio extends BaseEntity{
     
 	private String telefono;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "colegio")
 	private List<Estudiante> estudiantes;
-	
-	@OneToMany(mappedBy = "colegio")
-	private List<LogCargaArchivo> logs;
 
 	public Colegio() {
 		// TODO Auto-generated constructor stub
@@ -58,6 +58,22 @@ public class Colegio extends BaseEntity{
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.estudiantes = estudiantes;
+	}
+	
+	
+
+	/**
+	 * @param nombre
+	 * @param nit
+	 * @param direccion
+	 * @param telefono
+	 */
+	public Colegio(String nombre, String nit, String direccion, String telefono) {
+		super();
+		this.nombre = nombre;
+		this.nit = nit;
+		this.direccion = direccion;
+		this.telefono = telefono;
 	}
 
 	/**

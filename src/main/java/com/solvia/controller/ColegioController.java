@@ -34,6 +34,9 @@ public class ColegioController {
 
 	@PostMapping(path = "/create")
 	public ResponseEntity<String> create(@RequestBody Colegio colegio) {
+		
+		System.out.println("Se empezo a crear el colegio");
+		System.out.println("Se empezo a crear el colegio");
 
 		Colegio guardado = colServi.crear(colegio);
 
